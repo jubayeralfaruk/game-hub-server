@@ -4,12 +4,11 @@ const app = express();
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7000;
 
 //middleware
 app.use(express.json());
 app.use(cors());
-// 629UtoeMxwMLrWNM
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dzgjhab.mongodb.net/?appName=Cluster0`;
 
@@ -38,8 +37,8 @@ async function run() {
     });
 
     app.post("/games", async (req, res) => {
-      const parcel = req.body;
-      const result = gamesCollection.insertOne(parcel);
+      const game = req.body;
+      const result = gamesCollection.insertOne(game);
       res.send(result);
     });
 
@@ -55,7 +54,7 @@ run().catch(console.dir);
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get("/", (req, res) => {
-  res.send("Zap is shifting shifting");
+  res.send("GameHub is ready...");
 });
 
 app.listen(port, () => {
